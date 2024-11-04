@@ -1,13 +1,63 @@
+:root {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.board {
+  display: grid;
+  max-width: 550px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 40px auto;
+  box-shadow: 1px 1px 28px rgba(168, 102, 230, 0.974);
+}
+.square {
+  border: 1px solid whitesmoke;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  background-color: black;
+  overflow: hidden;
+}
+
+.square:first-child {
+  border-top-left-radius: 10px;
+}
+.square:nth-child(3) {
+  border-top-right-radius: 10px;
+}
+.square:nth-child(7) {
+  border-bottom-left-radius: 10px;
+}
+.square:nth-child(9) {
+  border-bottom-right-radius: 10px;
+}
+.square:hover {
+  background-color: hsla(0, 67%, 5%, 0.896);
+}
+
+.square > p {
+  font-size: 2.6rem;
+  user-select: none;
+  color: whitesmoke;
+}
+
+.square.win {
+  /* border-color: rgb(90, 239, 90); */
+  background-color: rgb(38, 165, 38);
+  /* border-width: 2px; */
 }
