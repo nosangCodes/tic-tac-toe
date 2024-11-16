@@ -19,18 +19,20 @@ export default function Board() {
   };
 
   const checkRow = () => {
-    for (let i = 0; i < 9; i += 3) {
-      console.log(table[i]);
+    for (let j = 0; j < 9; j++) {
+      console.log("check row", j);
+      // console.log("check row + 1", i + 1);
+      // console.log("check row + 2", i + 2);
       if (
-        table[i] === table[i + 1] &&
-        table[i] === table[i + 2] &&
-        !!table[i]
+        table[j] === table[j + 1] &&
+        table[j] === table[j + 2] &&
+        table[j] !== null
       ) {
-        setWinCells([i, i + 1, i + 2]);
+        setWinCells([j, j + 1, j + 2]);
         return true;
       }
-      return false;
     }
+    return false
   };
 
   const checkCol = () => {
@@ -38,7 +40,7 @@ export default function Board() {
       if (
         table[i] === table[i + 3] &&
         table[i] === table[i + 6] &&
-        !!table[i]
+        table[i] !== null
       ) {
         setWinCells([i, i + 3, i + 6]);
         return true;
@@ -49,9 +51,9 @@ export default function Board() {
 
   const checkDiagonal = () => {
     const firstDiag =
-      table[0] === table[4] && table[0] === table[8] && !!table[0];
+      table[0] === table[4] && table[0] === table[8] && table[0] !== null;
     const secondDiag =
-      table[2] === table[4] && table[2] === table[6] && !!table[2];
+      table[2] === table[4] && table[2] === table[6] && table[2] !== null;
 
     if (firstDiag) {
       setWinCells([0, 4, 8]);
@@ -63,10 +65,6 @@ export default function Board() {
   };
 
   const checkDraw = () => {
-    console.log(
-      "🚀 ~ checkDraw ~ table.filter((cell) => cell):",
-      table.filter((cell) => cell !== null).length === 9
-    );
     return table.filter((cell) => cell !== null).length === 9;
   };
 
@@ -78,6 +76,7 @@ export default function Board() {
     if (checkWin()) {
       setEndgame(true);
       setStatusMessage(`Match won by ${currentTurn === 1 ? "X" : "O"}`);
+      return;
     }
     if (checkDraw()) {
       setEndgame(true);
